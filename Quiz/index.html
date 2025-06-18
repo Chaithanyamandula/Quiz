@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Competition Platform</title>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="badge">Real-time Multiplayer Quiz Platform</div>
+                <h1>Quiz Competition<br><span class="subtitle">Platform</span></h1>
+                <p class="hero-description">
+                    Test your programming knowledge in real-time multiplayer quiz games. 
+                    Compete with developers worldwide and climb the leaderboards.
+                </p>
+                <button class="btn-primary hero-btn" onclick="showLanguageSelection()">
+                    Start Quiz Challenge
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Real-time Multiplayer</h3>
+                    <p>Compete with programmers worldwide in live quiz battles</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Leaderboards & Scoring</h3>
+                    <p>Track your progress and compete for the top spots on global leaderboards</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programming Questions</h3>
+                    <p>Test your knowledge in C, C++, Python, Java and more programming languages</p>
+                </div>
+            </div>
+
+            <!-- AWS Services Section -->
+            <div class="aws-section">
+                <h3>Powered by AWS Services</h3>
+                <div class="aws-grid">
+                    <div class="aws-service">
+                        <h4>Lambda</h4>
+                        <p>Serverless functions</p>
+                    </div>
+                    <div class="aws-service">
+                        <h4>DynamoDB</h4>
+                        <p>Real-time database</p>
+                    </div>
+                    <div class="aws-service">
+                        <h4>WebSocket API</h4>
+                        <p>Live connections</p>
+                    </div>
+                    <div class="aws-service">
+                        <h4>S3</h4>
+                        <p>Asset storage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Selection Page -->
+    <div id="language-page" class="page">
+        <div class="container">
+            <button class="btn-back" onclick="showHome()">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </button>
+            
+            <div class="page-header">
+                <i class="fas fa-code page-icon"></i>
+                <h1>Choose Your Language</h1>
+                <p>Select a programming language to test your knowledge and compete with others</p>
+            </div>
+
+            <div class="languages-grid" id="languages-grid">
+                <!-- Languages will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Game Page -->
+    <div id="quiz-page" class="page">
+        <div class="container">
+            <!-- Quiz Start Screen -->
+            <div id="quiz-start" class="quiz-start">
+                <div class="start-card">
+                    <h2 id="quiz-language-title">Language Quiz</h2>
+                    <p>You have 30 seconds per question. 5 questions total.</p>
+                    <button class="btn-primary" onclick="startQuiz()">Start Quiz</button>
+                    <button class="btn-secondary" onclick="showLanguageSelection()">
+                        <i class="fas fa-arrow-left"></i>
+                        Choose Different Language
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Playing Screen -->
+            <div id="quiz-playing" class="quiz-playing hidden">
+                <!-- Quiz Header -->
+                <div class="quiz-header">
+                    <h2 id="quiz-header-title">Language Quiz</h2>
+                    <div class="quiz-info">
+                        <div class="timer">
+                            <i class="fas fa-clock"></i>
+                            <span id="timer">30s</span>
+                        </div>
+                        <div class="question-counter">
+                            Question <span id="current-question">1</span> of <span id="total-questions">5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="question-card">
+                    <h3 id="question-text">Question will appear here</h3>
+                    <div class="options-container" id="options-container">
+                        <!-- Options will be populated by JavaScript -->
+                    </div>
+                    <button class="btn-primary hidden" id="next-btn" onclick="nextQuestion()">
+                        Next Question
+                    </button>
+                    <div class="result-message hidden" id="result-message"></div>
+                </div>
+
+                <!-- Score Display -->
+                <div class="score-display">
+                    Current Score: <span id="current-score">0</span>/<span id="current-total">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaderboard Page -->
+    <div id="leaderboard-page" class="page">
+        <div class="container">
+            <!-- Results Header -->
+            <div class="results-header">
+                <div class="results-emoji">🎯</div>
+                <h1>Quiz Complete!</h1>
+                <p id="completed-language">Programming Quiz</p>
+                
+                <div class="results-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="final-score">0/5</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="accuracy">0%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="user-rank">#1</div>
+                        <div class="stat-label">Rank</div>
+                    </div>
+                </div>
+
+                <div class="performance-badge" id="performance-badge">
+                    Perfect! 🎉
+                </div>
+
+                <button class="btn-primary" onclick="showHome()">
+                    <i class="fas fa-redo"></i>
+                    Play Again
+                </button>
+            </div>
+
+            <!-- Leaderboard -->
+            <div class="leaderboard-section">
+                <div class="leaderboard-header">
+                    <i class="fas fa-trophy leaderboard-icon"></i>
+                    <h2>Leaderboard</h2>
+                    <p id="leaderboard-language">Programming Quiz Rankings</p>
+                </div>
+
+                <div class="leaderboard-list" id="leaderboard-list">
+                    <!-- Leaderboard entries will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <style src="style.css"></style>
+</body>
+</html>
